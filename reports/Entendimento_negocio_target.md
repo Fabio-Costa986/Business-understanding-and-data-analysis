@@ -59,4 +59,3 @@ Essa variável é coletada após o cliente realizar a compra. Sendo que ele só 
 - validar se tem maior numero de atrasos por região
 - onde o NPS é mais baixo por região? está bem distribuido ou é um problema regional?
 - os clientes mais novos ou mais velhos tendem a reclamar mais ou menos?
-- 
