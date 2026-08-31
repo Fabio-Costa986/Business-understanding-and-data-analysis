@@ -1,2 +1,7 @@
 jupyter
 ipykernel
+pandas
+numpy
+matplotlib
+seaborn
+openpyxl
