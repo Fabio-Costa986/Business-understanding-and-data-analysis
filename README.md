@@ -129,7 +129,7 @@ Detratores (NPS ≤ 6) representam **83,7% da base de clientes** e são caracter
 | **Neutros** | 274 | 11,7% | 6,1-8 |
 | **Promotores** | 108 | 4,6% | 8,1-10 |
 
-**Insight:** Desbalanceamento severo de classes com maioria de detratores. Isso exigirá consideração durante a modelagem preditiva.
+**Insight:** Desbalanceamento severo de classes com maioria de detratores. 
 
 ### 4. Insights Demográficos
 
@@ -156,16 +156,24 @@ Business-understanding-and-data-analysis/
 ├── data/
 │   ├── desafio_nps_fase_1.csv         # Dataset original (entrada)
 │   └── processed/
-│       ├── nps_tratado.csv            # Dataset limpo (saída)
-│       ├── nps_registros_rejeitados.csv # Falhas de qualidade
-│       └── df_avaliacao.xlsx          # Arquivos de análise de apoio
+│       ├── nps_registros_rejeitados.csv # Registros que falharam nas validações
+        ├── nps_tratado.csv              # base tratada sem os registros marcados como inconsistentes
 │
 ├── notebook/
-│   ├── EDA - versao final.ipynb       # Notebook de análise completa (entrega principal)
-│   └── [outros notebooks de trabalho]
+│   ├── 01_tratamento_dados.ipynb      # Preparação e limpeza dos dados
+│   ├── 02_eda.ipynb                   # Análise Exploratória de Dados
+│   └── old/                           # Versões anteriores dos notebooks
 │
-└── reports/
-    └── 1IAST - Fase 1 - Tech Challenge.pdf # Relatório técnico da Fase 1
+├── reports/
+│   ├── 1IAST - Fase 1 - Tech Challenge.pdf # Relatório técnico da Fase 1
+│   ├── Entendimento_negocio_target.md     # Documentação de compreensão de negócio
+│   ├── insights_eda.md                    # Insights da análise exploratória
+│   ├── Roadmap.md                         # Planejamento dos próximos passos
+│   └── SLIDES_TECH_CHALLENGE_DIVIDIDO.md  # estrutura dos slides da apresentação
+│
+└── .claude/
+    └── skills/
+        └── eda-skill.md               # Instruções de IA para colaboração
 ```
 
 ---
@@ -244,75 +252,54 @@ Business-understanding-and-data-analysis/
    cd Business-understanding-and-data-analysis
    ```
 
-2. **Abra o notebook principal**
+2. **Abra os notebooks em sequência**
    ```bash
-   # Usando Jupyter
-   jupyter notebook "notebook/EDA - versao final.ipynb"
+   # Primeiramente: Preparação de Dados
+   jupyter notebook notebook/01_tratamento_dados.ipynb
+   
+   # Em seguida: Análise Exploratória
+   jupyter notebook notebook/02_eda.ipynb
    ```
 
 3. **Execute as células sequencialmente**
-   - As células estão organizadas por blocos (BLOCO 01-04)
-   - Cada bloco tem objetivos e saídas claros
+   - Comece com `01_tratamento_dados.ipynb` para preparar e validar os dados
+   - Prossiga com `02_eda.ipynb` para explorar e responder as perguntas de negócio
    - Os resultados são reproduzíveis com os mesmos dados de entrada
 
 4. **Revise os resultados**
    - Verifique `data/processed/` para datasets gerados
-   - Examine as visualizações nas células do notebook
+   - Examine as visualizações nos notebooks
    - Revise as descobertas documentadas nas células markdown
 
-### Blocos Principais do Notebook
+### Notebooks Principais
 
-| Bloco | Título | Propósito |
-|-------|--------|-----------|
-| 01 | Contexto e Preparação | Configuração do ambiente, carregamento de dados, reconhecimento de estrutura |
-| 02 | Qualidade dos Dados | Diagnósticos, duplicatas, validação, variáveis derivadas |
-| 03 | Engenharia de Características | Variáveis de agrupamento, classificação de NPS |
-| 04 | Análise Exploratória | Responder 4 perguntas de negócio, identificar fatores-chave |
-
----
-
-## Próximos Passos
-
-### Ações Imediatas
-1. **Desenvolvimento de Modelo (Fase 2)** 
-   - Construir modelo de classificação para previsão de categoria NPS
-   - Construir modelo de regressão para previsão de score NPS
-   - Abordar desbalanceamento de classe (83,7% detratores)
-
-2. **Investigação Adicional**
-   - Análise profunda de padrões regionais para regiões com NPS alto
-   - Analisar tipos específicos de reclamações e resoluções
-   - Análise de jornada do cliente para compradores que recompram
-
-3. **Aplicação de Negócio**
-   - Identificar alavancas acionáveis para melhorar o NPS
-   - Priorizar melhorias operacionais (entrega, reclamações)
-   - Desenvolver estratégias de retenção para clientes de alto valor
-
-### Hipóteses para Teste
-- Otimização do tempo de entrega reduz detratores
-- Velocidade de resolução de reclamações correlaciona com melhoria de NPS
-- Intervenções direcionadas podem deslocar neutros para promotores
+| Notebook | Conteúdo Principal |
+|----------|-------------------|
+| **01_tratamento_dados.ipynb** | Carregamento, limpeza, validação de qualidade, engenharia de características (variáveis de agrupamento) e geração de dataset processado |
+| **02_eda.ipynb** | Análise exploratória completa, correlações, comparações entre segmentos, distribuições, resposta às 4 perguntas de negócio e identificação de fatores-chave |
 
 ---
 
 ## Como Usar Este Repositório
 
 ### Para Cientistas de Dados/Analistas
-1. Revise o notebook principal para metodologia e descobertas
-2. Use `nps_tratado.csv` para qualquer análise adicional ou modelagem
-3. Referencie `nps_registros_rejeitados.csv` para contexto de qualidade
+1. Revise `02_eda.ipynb` para metodologia, análises e descobertas principais
+2. Consulte `01_tratamento_dados.ipynb` para entender as transformações de dados
+3. Use os dados em `data/processed/` para análises adicionais ou modelagem
+4. Referencie `nps_registros_rejeitados.csv` para contexto de qualidade
 
 ### Para Stakeholders de Negócio
 1. Comece com a seção "Principais Descobertas" deste README
-2. Revise as visualizações no notebook principal
+2. Revise as visualizações em `02_eda.ipynb`
 3. Verifique "Próximos Passos" para recomendações estratégicas
+4. Consulte `reports/` para apresentações e documentação executiva
 
 ### Para Novos Membros da Equipe
-1. Leia este README para contexto
-2. Revise os blocos do notebook em sequência (01-04)
-3. Execute o notebook para entender o fluxo de dados
-4. Verifique a pasta `reports/` para resumos executivos
+1. Leia este README para contexto geral
+2. Execute `01_tratamento_dados.ipynb` para entender a preparação de dados
+3. Execute `02_eda.ipynb` para ver as análises exploratórias
+4. Revise os documentos em `reports/` para resumos executivos e insights
+5. Consulte `.claude/skills/eda-skill.md` para contexto de colaboração com IA
 
 ---
 
@@ -323,7 +310,7 @@ Business-understanding-and-data-analysis/
   - Neutros: 6,1 a 8,0
   - Promotores: > 8,0
 
-- **Unidade de Análise:** Cada linha representa um pedido de um cliente (pode haver clientes repetidos)
+- **Unidade de Análise:** Cada linha representa um pedido de um cliente
 
 - **Estratégia de Dados Ausentes:** Nenhuma imputação realizada; todos os registros retidos pois nenhum valor estava ausente
 
@@ -335,7 +322,7 @@ Business-understanding-and-data-analysis/
 
 Para dúvidas sobre esta análise, favor contactar os membros da equipe do projeto listados acima.
 
-**Última Atualização:** 24/08/2026  
+**Última Atualização:** 31/08/2026  
 **Fase:** 1 - Compreensão de Negócio e Análise de Dados  
 **Status:** Análise Exploratória Completa - Pronto para Modelagem
 
