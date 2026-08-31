@@ -34,10 +34,10 @@ Este projeto conduz a **fase de compreensão de negócio e análise de dados** d
 ## Equipe
 
 - Amanda Alves de Lima Santos - RM376932
-- Fábio da Silva Costa
-- Gabriel Victor
-- Vanessa Partala
-- 
+- Fábio da Silva Costa - 
+- Gabriel Victor Santos Oliveira - RM376713
+- Vanessa Partala - RM376277
+- Humberto Henrique Alves Moreira dos Santos - RM377025
 
 ---
 
